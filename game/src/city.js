@@ -1,11 +1,11 @@
-// city.js — FASE 1 revision: the seeded district as a reusable world factory.
-// createCity() builds the renderer/scene/camera and returns the world plus the
-// data the other systems need: building AABBs (player collision), road lines
-// (traffic + pedestrians), the open centre plaza (mission objective) and the
-// district bounds. It starts NO render loop — main.js owns the loop and the
-// camera. Deterministic: the same seed always builds the same skyline
-// (mulberry32 PRNG). The centre block is kept clear of buildings so the
-// plaza is a real open square.
+// city.js — the seeded district as a reusable world factory.
+// createCity() builds renderer, scene and camera, then returns the world
+// plus the data other systems need: building AABBs for player collision,
+// road lines for traffic and pedestrians, the open centre plaza (the
+// mission objective) and the district bounds. It starts NO render loop —
+// main.js owns the loop and the camera. Deterministic: the same seed
+// always builds the same skyline (mulberry32 PRNG). The centre block is
+// kept clear of buildings so the plaza is a real open square.
 
 import * as THREE from 'three';
 
@@ -145,7 +145,7 @@ export function createCity() {
   scene.add(buildings);
 
   // --- Centre plaza: a lighter concrete square marking the district heart,
-  // now genuinely open — the mission objective lives here. ---
+  // genuinely open — the mission objective lives here. ---
   const plaza = new THREE.Mesh(
     new THREE.PlaneGeometry(BLOCK_SIZE - ROAD_WIDTH, BLOCK_SIZE - ROAD_WIDTH),
     new THREE.MeshLambertMaterial({ color: 0x8a8d90 }),
